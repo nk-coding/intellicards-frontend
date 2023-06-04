@@ -124,11 +124,12 @@ async function handleFileChange(event: any) {
   formData.append("file", file);
 
   try {
-    const response = await axios.post(`http://kkohlen.me/file/${route.params.chapterId}`, formData, {
+    const response = await axios.post(`http://kkohlen.me:9090/file/${route.params.chapter}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
+    reloadChapter();
 
     console.log("Upload response:", response.data);
   } catch (error) {
