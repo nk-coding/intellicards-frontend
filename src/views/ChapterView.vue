@@ -124,7 +124,7 @@ async function handleFileChange(event: any) {
   formData.append("file", file);
 
   try {
-    const response = await axios.post("/api/file/test", formData, {
+    const response = await axios.post(`http://kkohlen.me/file/${route.params.chapterId}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
