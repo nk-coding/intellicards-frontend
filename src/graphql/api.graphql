@@ -1,0 +1,40 @@
+query getMaterials {
+    user {
+        materials {
+            nodes {
+                id
+                title
+                chapters {
+                    nodes {
+                        id
+                        title
+                    }
+                }
+            }
+        }
+    } 
+}
+
+query getChapter($id: ID!) {
+    node(id: $id) {
+        ...on Chapter {
+            id
+            title
+            flashcards {
+                nodes {
+                    id
+                    question
+                    answer
+                }
+            }
+        }
+    }
+}
+
+mutation createMaterial($title: String!) {
+    createMaterial(input: {title: $title}) {
+        material {
+            id
+        }
+    }
+}
