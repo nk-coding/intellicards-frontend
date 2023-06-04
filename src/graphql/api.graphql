@@ -38,3 +38,11 @@ mutation createMaterial($title: String!) {
         }
     }
 }
+
+mutation createChapter($material: ID!, $title: String!) {
+    createChapter(input: {material: $material, title: $title}) {
+        chapter {
+            id
+        }
+    }
+}

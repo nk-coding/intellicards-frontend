@@ -399,6 +399,14 @@ export type CreateMaterialMutationVariables = Exact<{
 
 export type CreateMaterialMutation = { __typename?: 'Mutation', createMaterial?: { __typename?: 'CreateMaterialPayload', material?: { __typename?: 'Material', id: string } | null } | null };
 
+export type CreateChapterMutationVariables = Exact<{
+  material: Scalars['ID']['input'];
+  title: Scalars['String']['input'];
+}>;
+
+
+export type CreateChapterMutation = { __typename?: 'Mutation', createChapter?: { __typename?: 'CreateChapterPayload', chapter?: { __typename?: 'Chapter', id: string } | null } | null };
+
 
 export const GetMaterialsDocument = gql`
     query getMaterials {
@@ -444,6 +452,15 @@ export const CreateMaterialDocument = gql`
   }
 }
     `;
+export const CreateChapterDocument = gql`
+    mutation createChapter($material: ID!, $title: String!) {
+  createChapter(input: {material: $material, title: $title}) {
+    chapter {
+      id
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -460,6 +477,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     createMaterial(variables: CreateMaterialMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateMaterialMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateMaterialMutation>(CreateMaterialDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createMaterial', 'mutation');
+    },
+    createChapter(variables: CreateChapterMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateChapterMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateChapterMutation>(CreateChapterDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createChapter', 'mutation');
     }
   };
 }

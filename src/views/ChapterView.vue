@@ -6,7 +6,7 @@
           {{ chapter?.title ?? "Loading..." }}
         </div>
         <v-spacer></v-spacer>
-        <v-btn icon @click="fileInput!.click()">
+        <v-btn icon variant="tonal" @click="fileInput!.click()">
           <v-icon>mdi-upload</v-icon>
         </v-btn>
         <input
