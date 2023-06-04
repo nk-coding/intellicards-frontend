@@ -11,7 +11,7 @@
         <span class="ml-3 text-h6"> IntelliCards </span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn icon>
+      <v-btn icon v-if="store.username != undefined" @click="store.username = null">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
       <v-btn icon @click="toggleDarkMode()">
@@ -24,7 +24,8 @@
       </v-btn>
     </v-app-bar>
     <v-main class="mt-3 mx-3 pb-5">
-      <router-view />
+      <router-view v-if="store.username != undefined"/>
+      <LoginView v-else/>
     </v-main>
   </v-app>
 </template>
@@ -32,10 +33,11 @@
 <script lang="ts" setup>
 import debounce from "lodash/debounce";
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
 import { useTheme } from "vuetify/lib/framework.mjs";
+import { useStore } from "./store";
+import LoginView from "./views/LoginView.vue";
 
-const route = useRoute();
+const store = useStore();
 
 function setViewHeight() {
   const vh = window.innerHeight * 0.01;

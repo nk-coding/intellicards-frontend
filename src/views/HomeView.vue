@@ -108,10 +108,12 @@
 <script lang="ts" setup>
 import { getClient } from "@/graphql/client";
 import { Material } from "@/graphql/generated";
+import { useStore } from "@/store";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-const client = getClient();
+const store = useStore();
+const client = getClient(store.username!);
 const router = useRouter();
 
 const materials = ref<Material[]>([]);

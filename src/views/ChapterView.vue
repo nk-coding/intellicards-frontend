@@ -89,8 +89,10 @@ import axios from "axios";
 // @ts-ignore
 import Tinder from "vue-tinder";
 import "vue-tinder/lib/style.css";
+import { useStore } from "@/store";
 
-const client = getClient();
+const store = useStore();
+const client = getClient(store.username!);
 
 const route = useRoute();
 const chapter = ref<Chapter | null>(null);
